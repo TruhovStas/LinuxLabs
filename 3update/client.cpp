@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
         {
             kill(serverPid, SIGUSR1);
 
-            sleep(2);  /
+            sleep(2);
             moves--;
         }
 
