@@ -4,23 +4,26 @@
 
 #define SHMEM_SIZE 4096
 
-int main() {
+int main()
+{
     int shm_id;
     char *shm_buf;
     struct shmid_ds ds;
 
-    // Создаем сегмент общей памяти
-    shm_id = shmget(IPC_PRIVATE, SHMEM_SIZE, IPC_CREAT | IPC_EXCL | 0600);
-
-    if (shm_id == -1) {
-        fprintf(stderr, "shmget() error\n");
+    if (argc < 2)
+    {
+        fprintf(stderr, "Usage: %s <shm_id>\n", argv[0]);
         return 1;
     }
+
+    // Получаем идентификатор сегмента из аргумента командной строки
+    shm_id = atoi(argv[1]);
 
     // Присоединяем сегмент к адресному пространству процесса
     shm_buf = (char *)shmat(shm_id, NULL, 0);
 
-    if (shm_buf == (char *)-1) {
+    if (shm_buf == (char *)-1)
+    {
         fprintf(stderr, "shmat() error\n");
         return 1;
     }
@@ -38,7 +41,7 @@ int main() {
 
     // Отсоединяем сегмент от адресного пространства
     shmdt(shm_buf);
-    
+
     // Удаляем сегмент общей памяти
     shmctl(shm_id, IPC_RMID, NULL);
 
