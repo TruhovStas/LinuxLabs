@@ -28,13 +28,8 @@ int main()
         return 1;
     }
 
-    // Узнаем информацию о сегменте
-    shmctl(shm_id, IPC_STAT, &ds);
-
-    printf("ID: %d\n", shm_id);
-
     // Добавляем свое сообщение в общий сегмент
-    strcat(shm_buf, "Hello from owner02!\n");
+    strcat(shm_buf, "Owner2 say: Grudinskiy Kirill!\n");
 
     printf("Press <Enter> to exit...");
     fgetc(stdin);
