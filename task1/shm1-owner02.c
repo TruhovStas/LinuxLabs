@@ -4,7 +4,7 @@
 
 #define SHMEM_SIZE 4096
 
-int main()
+int main(int argc, char **argv)
 {
     int shm_id;
     char *shm_buf;
